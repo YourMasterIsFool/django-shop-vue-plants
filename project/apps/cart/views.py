@@ -21,4 +21,33 @@ class CartViewSet(viewsets.ModelViewSet):
         return queryset
 
 
+    def create(self, request):
+
+
+        """ 
+        get request user and 
+        parsing into reques.data 
+
+        """
+        
+        user = request.user.id
+    
+        request.data['user'] = user
+
+        return super().create(request)
+
+   
+    def update(self, request, pk=None, *args, **kwargs):
+
+        print(request.data)
+        partial = kwargs.pop('partial', False)
+
+        instance = self.get_object()
+        serializer = self.get_serializer(instance, data=request.data, partial=partial)
+        
+        serializer.is_valid(raise_exception=True)
+
+        serializer.save()
+
+        return Response(serializer.data)
 

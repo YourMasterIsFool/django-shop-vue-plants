@@ -74,7 +74,7 @@
 						Price
 					</td>
 					<td>
-						Order
+						Stock
 					</td>
 					<td>
 						Date

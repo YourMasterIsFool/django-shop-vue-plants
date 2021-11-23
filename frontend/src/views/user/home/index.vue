@@ -5,6 +5,10 @@
 	import FilterSkeleton from './skeleton/FilterSkeleton.vue';
 	import {width} from '@/mixins/screen'
 	import ProductService from '@/models/product/service'
+	import {useRouter} from 'vue-router';
+
+
+
 
 	const Sort = defineAsyncComponent({
 		loader: () => import('./components/Sort.vue')
@@ -77,7 +81,7 @@
 			])
 
 
-
+			const router = useRouter()
 
 			provide('tabs', tabs)
 
@@ -85,10 +89,11 @@
 			const products = ref(null)
 
 			const selectedProduct = ref(null)
+
 			const selectedProductDetail = ref(null)
-			function fetchProductSelect(id:Number) {
-				const product = products.value.find(map => map.id == id)
-				selectedProduct.value = product
+
+			function fetchProductSelect(id) {
+				router.push({name:'user-product-detail', params:{id}})
 			}
 
 
@@ -118,6 +123,7 @@
 				tabSelect,
 				products,
 				selectedProduct,
+				router,
 				fetchProductSelect,
 			}
 		}
@@ -148,7 +154,7 @@
 
 						<div class="mt-8">
 							<div class="grid grid-cols-2 lg:grid-cols-3 lg:gap-6 gap-4">
-								<Product  class="cursor-pointer hover:bg-gray-100 transition-all duration-300" @click="fetchProductSelect(product.id)" :product="product" v-for="product in products">
+								<Product class="cursor-pointer hover:bg-gray-100 transition-all duration-300" @click="fetchProductSelect(product.id)" :product="product" v-for="product in products">
 									
 								</Product>
 							</div>

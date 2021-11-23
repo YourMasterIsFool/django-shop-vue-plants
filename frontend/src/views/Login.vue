@@ -50,7 +50,7 @@
 	<div class="">
 		<div class="text-gray-600 fixed h-screen w-screen top-0 left-0 flex items-center p-6 lg:p-0 justify-center">
 			<div class="lg:w-1/4 p-6 bg-white rounded-xl shadow-md border border-gray-200">
-				{{loading}}
+				
 				<h1 class="text-xl font-semibold">
 					Login
 				</h1>

@@ -24,6 +24,8 @@ class CartSerializer(serializers.ModelSerializer):
             check update date when data is exist
             update the data
         """
+
+        print(validated_data);
         cart, created = Cart.objects.update_or_create(
             product=validated_data.get('product', None),
             user=validated_data.get('user', None),
@@ -35,3 +37,7 @@ class CartSerializer(serializers.ModelSerializer):
             }
         )
         return cart
+
+
+
+

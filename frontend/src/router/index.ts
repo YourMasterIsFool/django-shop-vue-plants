@@ -1,30 +1,42 @@
 import {createRouter, createWebHistory} from 'vue-router'
 
 const routes = [
+	
 
+	//login
 	{
 		path: '/login',
 		name: 'login',
 		component:() => import('@/views/Login.vue')
 	},
+	
+	// register
 	{
 		path: '/register',
 		name: 'register',
 		component:() => import('@/views/Register.vue')
 	},
+
+	//product-detail
+	
+
+
 	{
 		path: '/',
 		name: 'user',
 		component: () =>  import('@/views/user/base.vue'),
-		
 		children: [
+			{
+				path: '/product/:id',
+				name: 'user-product-detail',
+				component:() => import('@/views/user/product/detail.vue')
+			},
 
 			{
 				path: "",
 				name: 'user-home',
 				component: () => import('@/views/user/home/index.vue')
 			},
-
 			{
 				path: "cart",
 				name: 'user-cart',
@@ -92,19 +104,19 @@ const router = createRouter({
 })
 
 
-router.beforeEach((to, from, next) =>{
-	if(to.matched.some(record => record.meta.requiresAuth)) {
-		if(!localStorage.getItem('access')){
-			return next({path: '/login'})
-		}
-		else {
-			next()
-		}
-	}
-	else {
-		next()
-	}
-})
+// router.beforeEach((to, from, next) =>{
+// 	if(to.matched.some(record => record.meta.requiresAuth)) {
+// 		if(!localStorage.getItem('access')){
+// 			return next({path: '/login'})
+// 		}
+// 		else {
+// 			next()
+// 		}
+// 	}
+// 	else {
+// 		next()
+// 	}
+// })
 
 
 export default router

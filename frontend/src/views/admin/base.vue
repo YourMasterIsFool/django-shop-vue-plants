@@ -120,7 +120,7 @@
 						</div>
 
 							<button @click="showSidebar = true" v-show="!showSidebar && !route.path.includes('/user/profile/') ">
-							<img :src="User?.user.profile.photo" class="w-12 object-cover mr-2 h-12 rounded-full bg-gray-200" />
+							<img  class="w-12 object-cover mr-2 h-12 rounded-full bg-gray-200" />
 							</button>
 
 					</div>
@@ -138,7 +138,7 @@
 			<template v-slot:header>
 				<div class="flex items-center justify-between">
 					<div class="flex items-center">
-						<img :src="User?.user.profile.photo" class="w-12 object-cover mr-2 h-12 rounded-full 	bg-gray-200" />
+						<!-- <img :src="User?.user.profile.photo" class="w-12 object-cover mr-2 h-12 rounded-full 	bg-gray-200" /> -->
 						
 						
 						<div>

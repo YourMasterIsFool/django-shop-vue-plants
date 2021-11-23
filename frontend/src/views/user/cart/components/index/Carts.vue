@@ -1,13 +1,18 @@
 <script lang="ts">
-	
+	import {reactive, onBeforeMount} from 'vue'
 	import Cart from '@/models/cart/cart_model'
+	import CartVue from './Cart.vue'
 
 	export default {
+		components: {
+			CartVue
+		},
 		setup() {
-
+			
 
 			return {
-				Cart
+				Cart,
+			
 			}
 		}
 	}
@@ -17,45 +22,17 @@
 
 <template>
 	<div>
-		<table id="cart" class="w-full mt-6 hidden lg:block">
-			<tr v-for='cart in Cart.carts'>
-				<td width="50">
-					<input type="checkbox">
-				</td>
-				<td width="400">
-
-					<div class="flex lg:pr-10">
-						<img :src="cart?.product.product_image" class="rounded-xl h-24 w-24" alt=""/>
-
-						<div class="flex flex-col ml-2">
-							<span class="capitalize font-semibold">
-								{{cart?.product.product_name}}
-							</span>
-							<span class="mt-1 text-gray-500 text-xs">
-								{{cart?.product.product_detail?.description}}
-								
-							</span>
-
-						</div>
-					</div>	
-
-				</td>
-				<td width="100">
-					<span class="font-bold text-xl">
-						$6000
-					</span>
-				</td>
-				<td width="100">
-					<div class="flex items-center text-xs">
-						<span class="mr-2">
-							Quantity:
-						</span>
-						<input type="number" class="lg:w-24 rounded-lg bg-gray-100 text-xs pl-3 outline-none py-2">
-						
-					</div>
-				</td>
-				
-			</tr>
-		</table>	
+		<ul v-if="Cart.carts.length > 0">
+			<li  class="lg:pb-8" v-for="cart in Cart.carts" >
+				<CartVue :cart="cart"></CartVue>
+			</li>
+		</ul>
+		<div  class="h-72 w-full flex justify-center items-center">
+			<div class="w-72">
+				<span class="text-xl text-green-600 font-semibold">
+				Tidak memiliki item di keranjang	
+			</span>	
+			</div>		
+		</div>
 	</div>
 </template>

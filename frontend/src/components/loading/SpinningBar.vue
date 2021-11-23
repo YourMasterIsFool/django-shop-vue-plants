@@ -2,7 +2,11 @@
 
 	export default {
 		props:{
-			customStyle:String
+			customStyle:{
+				type:String,
+				default: "h-4 w-4 border-gray-600"
+			},
+
 		},
 		setup(props){
 			return {

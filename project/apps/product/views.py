@@ -22,7 +22,7 @@ class ProductViewSet(viewsets.ModelViewSet):
     serializer_class = ProductSerializer
     permission_classes = [permissions.AllowAny]
     # get reviews product
-
+    
     @action(detail=True)
     def reviews(self, request, pk):
         # get data review

@@ -23,7 +23,7 @@ axios.interceptors.request.use(function(config) {
 
 		config.headers = {
 			'Authorization': `Bearer ${key}`,
-			// 'Accept': 'application/json',
+			'Accept': 'application/json',
 		}
 	}
 
@@ -54,8 +54,8 @@ async function (error) {
 
 	if(error.response.status == 401) {
 
-		router.push('/login')
-		loading.value = false
+		// router.push('/login')
+		
 	}
 
 	loading.value = false
@@ -63,14 +63,14 @@ async function (error) {
 }
 )
 
-loading.value = false
+
 
 
 
 // createApp(App).mount('#app')
 const app = createApp(App)
 app.provide('moment', moment)
-app.provide('loading', loading.value)
+app.provide('loading', loading)
 app.use(router)
 app.provide('axios', axios)
 

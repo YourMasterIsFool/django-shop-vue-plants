@@ -3,7 +3,7 @@ from django.db.models.aggregates import Avg, Sum
 from rest_framework import serializers
 from .models import Product, ProductDetail, ProductFrom
 from apps.product_sub_category.serializers import SubCategorySerializer
-
+import math
 
 class ProductFromSerializer(serializers.ModelSerializer):
     class Meta:
@@ -24,8 +24,10 @@ class ProductDetailSerializer(serializers.ModelSerializer):
 class ProductSerializer(serializers.ModelSerializer):
 
     stock = serializers.SerializerMethodField(read_only=True)
+    ratings_avg = serializers.SerializerMethodField(read_only=True)
     product_detail = ProductDetailSerializer(
         source="product_detail_set", read_only=True)
+    reviews_count = serializers.SerializerMethodField(read_only=True)
 
     def get_stock(self, obj):
 
@@ -37,9 +39,25 @@ class ProductSerializer(serializers.ModelSerializer):
         # stock = stock_in - stock_out
         return stock_in - stock_out
 
+
+    def get_ratings_avg(self, obj):
+
+        ratings = obj.product_review_set.aggregate(
+            total=Sum('rating')
+        ).get('total') or 5
+
+        return math.ceil(ratings)
+
+    def get_reviews_count(self, obj):
+        count = obj.product_review_set.count()
+
+        return count
+  
     class Meta:
         model = Product
         fields = ['id', 'product_name', 
+                    'reviews_count',
+                    'ratings_avg',
                     'category',
                     'status',
                     'date',

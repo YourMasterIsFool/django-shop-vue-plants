@@ -37,6 +37,15 @@ class ProductService {
 			})
 		})
 	}
+
+	async get_detail(id):Promise<any>{
+		return new Promise((resolve, reject) => {
+			axios.get(`products/${id}/`)
+			.then((resp) => {
+				resolve(resp)
+			})
+		})
+	}
 }
 
 export default new ProductService
